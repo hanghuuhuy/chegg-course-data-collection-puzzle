@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'application'
+
+group = "net.cheggbot"
+version = '1.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.google.guava:guava:14.0.1'
+    compile 'org.jsoup:jsoup:1.6.3'
+    compile 'org.slf4j:slf4j-simple:1.7.5'
+    compile 'org.reflections:reflections:0.9.9-RC1'
+}
+
+task testSolution(dependsOn: jar, type: JavaExec, group: "Run"){
+    main = "contractor.ContractorHTMLSolution"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task archive(dependsOn: 'jar',type: Tar) {
+    baseName = "Puzzle_solution"
+    destinationDir = new File('.')
+    compression = Compression.GZIP
+    from ('src/contractor/')
+}
+
+//mainClassName = "contractor.ContractorHTMLSolution"
