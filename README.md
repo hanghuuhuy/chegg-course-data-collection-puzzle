@@ -5,7 +5,7 @@ Puzzle for oDesk Contractors (Data Collection Team)
 
 How to use this project
 
-1. Download gradle 1.5 http://services.gradle.org/distributions/gradle-1.5-bin.zip
+1. Download gradle (http://www.gradle.org/downloads)
 2. Extract to somewhere (I suggest your home directory)
 3. Add add /path/to/gradle-1.5/bin to your OS PATH variable
 4. Test it out by starting a shell and running gradle -version. You should see some version numbers.
