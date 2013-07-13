@@ -61,10 +61,42 @@ public class ContractorHTMLSolution extends Solution {
 		*	results.add(wbr)
 		*/
 		
-		
-		
-		
-		
+		try {
+			Document doc = Jsoup.parse(inputFile, "UTF-8");
+			
+			Elements rows = doc.select("table[class=wikitable sortable jquery-tablesorter] > tbody > tr");
+			
+			for (Element row: rows) {
+				
+				WebBrowserRecord wbr = new WebBrowserRecord();
+				
+				Element cell0 = row.select("th").first();
+				String name = cell0.text();
+				
+				Elements cells = row.select("td");
+				String cost = cells.get(1).text();
+				String creator = cells.get(0).text();
+				String license = cells.get(2).text();
+				String layoutEngine = cells.get(3).text();
+				
+				System.out.println("name=" + name);
+				System.out.println("creator=" + creator);
+				System.out.println("cost=" + cost);
+				System.out.println("license=" + license);
+				System.out.println("layoutEngine=" + layoutEngine);
+				
+				wbr.setName(name);
+				wbr.setCost(cost);
+				wbr.setCreator(creator);
+				wbr.setLicense(license);
+				wbr.setLayoutEngine(layoutEngine);
+				results.add(wbr);	
+			}
+			
+				
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return results;
 	}
